@@ -5,6 +5,8 @@
       {
         "appIDs": ["RP2X785VPQ.app.aaweb.browser"],
         "components": [
+          { "/": "/" },
+          { "/": "/go*" },
           { "/": "/open*" },
           { "/": "/browse*" }
         ]
