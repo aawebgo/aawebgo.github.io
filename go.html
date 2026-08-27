@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <title>aaweb</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #0a0a0b;
+        color: #f5f5f7;
+        font: 16px/1.4 -apple-system, system-ui, sans-serif;
+      }
+      main {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        gap: 16px;
+        text-align: center;
+      }
+      p {
+        margin: 0;
+        color: rgba(245, 245, 247, 0.46);
+        font-size: 14px;
+      }
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 22px;
+        border-radius: 999px;
+        background: #f5f5f7;
+        color: #0a0a0b;
+        text-decoration: none;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a id="open" href="aaweb://open">aaweb’de aç</a>
+      <p id="hint">Uygulama açılmazsa bu düğmeye dokun.</p>
+    </main>
+    <script>
+      (function () {
+        function readTarget() {
+          try {
+            var q = new URLSearchParams(location.search);
+            var raw = q.get('u') || q.get('url') || '';
+            if (!raw && location.hash.length > 1) raw = location.hash.slice(1);
+            raw = String(raw || '').trim();
+            if (!raw) return '';
+            try {
+              raw = decodeURIComponent(raw);
+            } catch (e) {}
+            if (/^https?:\/\//i.test(raw)) return raw;
+            if (raw.indexOf('.') > 0) return 'https://' + raw.replace(/^\/+/, '');
+            return '';
+          } catch (e) {
+            return '';
+          }
+        }
+
+        var site = readTarget();
+        var encoded = site ? encodeURIComponent(site) : '';
+        var custom = 'aaweb://open' + (encoded ? '?url=' + encoded : '');
+        var intent =
+          'intent://open' +
+          (encoded ? '?url=' + encoded : '') +
+          '#Intent;scheme=aaweb;package=app.aaweb.browser;end';
+        var android = /android/i.test(navigator.userAgent);
+        var href = android ? intent : custom;
+        var link = document.getElementById('open');
+        link.href = href;
+        if (!site) {
+          document.getElementById('hint').textContent = 'aaweb yüklüyse uygulamayı açar.';
+        }
+        try {
+          location.replace(href);
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>
