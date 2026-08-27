@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["RP2X785VPQ.app.aaweb.browser"],
+        "components": [
+          { "/": "/open*" },
+          { "/": "/browse*" }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["RP2X785VPQ.app.aaweb.browser"]
+  }
+}
