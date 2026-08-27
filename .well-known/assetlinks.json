@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.aaweb.browser",
+      "sha256_cert_fingerprints": [
+        "5B:7C:FB:B0:F4:0D:86:09:6D:97:A9:8D:24:50:E0:5B:64:CA:79:9A:B6:2A:D8:53:12:FB:5A:02:A3:DB:0A:3F"
+      ]
+    }
+  }
+]
